@@ -1,1 +1,7 @@
 # This contains params to be used by the stages to train or predict
+train: 
+  split: 0.3
+  random_state: 42
+  target_col: quality
+  alpha: 0.7
+  l1_ratio: 0.7
