@@ -5,6 +5,7 @@ from tqdm import tqdm
 import logging
 from src.utils.common import read_yaml, create_directories
 import random
+from urllib import request
 
 
 STAGE = "Get data" ## <<< change stage name 
@@ -17,11 +18,17 @@ logging.basicConfig(
     )
 
 
+def download_data(config):
+    URL = config["source_url"]
+    RAW_DATA_DIR = config['artifacts']["RAW_DATA_DIR"]
+    create_directories([RAW_DATA_DIR])
+    RAW_DATA_FILPATH = config['artifacts']["RAW_DATA_FILEPATH"]
+    request.urlretrieve(URL, RAW_DATA_FILPATH)
+
 def main(config_path, params_path):
     ## read config files
     config = read_yaml(config_path)
-    params = read_yaml(params_path)
-    pass
+    download_data(config)
 
 
 if __name__ == '__main__':
